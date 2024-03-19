@@ -16,7 +16,7 @@ public class DoWhileEx {
 		System.out.print("숫자를 입력하세요. [0] 이면 종료!\n");	
 		int total = 0, num;
 
-		do {
+		do { // 적어도 한번은 실행되어야 하는 구문
 		num = scan.nextInt();
 		total = total + num;
 		System.out.print("합계: " + total + "\n");
