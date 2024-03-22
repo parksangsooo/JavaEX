@@ -6,4 +6,6 @@ public class Goods {
 	String name; // 상품명
 	int price; // 가격
 	
+	
+	
 }
