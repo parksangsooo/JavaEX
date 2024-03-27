@@ -4,13 +4,16 @@ public class Person {
 	private String name;
 	private int age;
 	
-	public Person() {
-		
-	}
-	
+//	public Person() {
+//		
+//	}
+//	
 	public Person(String name, int age) {
+		super();
 		this.name = name;
 		this.age = age;
+		
+		System.out.println("Inside Person Constructor");
 	}
 	
 	
@@ -31,16 +34,14 @@ public class Person {
 	}
 	
 	public void showInfo() {
-		System.out.println("Inside Person Constructor");
 		System.out.printf("이름: %s, 나이: %d\n", name, age);		
 	}
 	
-	public void showInfo(boolean bShow) {
-		System.out.println("Inside Person Constructor");
-
-		String message = String.format("이름: %s, 나이: %d\n", name, age);
-						
-		System.out.println(message);
-}
+//	public void showInfo(boolean bShow) {
+//
+//		String message = String.format("이름: %s, 나이: %d\n", name, age);
+//						
+//		System.out.println(message);
+//}
 
 }

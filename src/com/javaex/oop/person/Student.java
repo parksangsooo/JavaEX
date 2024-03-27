@@ -4,15 +4,18 @@ public class Student extends Person {
 	
 	private String school;
 	
-	
-	public Student(String school) {
-		this.school = school;
-	}
-	
 	public Student(String name, int age, String school) {
 		super(name, age); 	// 부모 생성자 호출
 		this.school = school;
+		System.out.println("Student 파라미터 3개");
 	}
+	
+	public Student(String school) {
+		super("",0);
+		this.school = school;
+		System.out.println("Student 파라미터 1개");
+	}
+	
 	
 	// getter & setter
 	public String getSchool() {
@@ -24,8 +27,8 @@ public class Student extends Person {
 	}
 	@Override
 	public void showInfo() {
-		System.out.println("Inside Person Constructor");
-		System.out.printf("이름: %s, 나이: %d\n 학교: %s\n", super.getName(), super.getAge(), school);
+		super.showInfo();
+		System.out.println("학교: " + school);
 	}
 	
 //	@Override
