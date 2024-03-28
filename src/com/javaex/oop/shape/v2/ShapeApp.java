@@ -19,7 +19,7 @@ public class ShapeApp {
 		// Point -> Shape 서브클래스가 아님(노관계)
 		// Circle, Rectangle, Point -> Drawable 이라는 공통괸 인터페이스를 지니고 있다.
 		
-		Drawable objs[] = new Drawalbe[] {r, c, p};
+		Drawable objs[] = new Drawable[] {r, c, p};
 		
 		for (Drawable obj: objs) {
 			if (obj instanceof Drawable) {
