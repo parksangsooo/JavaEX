@@ -1,8 +1,7 @@
 package com.javaex.api.arrays;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicReferenceArray;
+
 
 public class ArrayCopyEx {
     // 배열 복제
