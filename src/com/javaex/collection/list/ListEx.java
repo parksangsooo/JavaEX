@@ -1,5 +1,6 @@
 package com.javaex.collection.list;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,16 @@ public class ListEx {
         lst.remove("Python");
         System.out.println("lst= " + lst);
 
-        // TODO: List 순회
+        // TODO: List 순회(Set, List 순회시에는 Iterator 객체 사용
+        System.out.println("------------------- Iterator");
+        Iterator<String> it = lst.iterator();   // 반복자 추출
+
+        while (it.hasNext()) {  // 뒤에 더 있음?
+            String item = it.next();        // 요소 추출 후 다음으로 이동
+            System.out.println(item + " ");
+        }
+        System.out.println();
+
         // 비워봅시다.
         lst.clear();
         System.out.println("lst= " + lst);
