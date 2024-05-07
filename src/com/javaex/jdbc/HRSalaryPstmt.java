@@ -3,7 +3,7 @@ package com.javaex.jdbc;
 import java.sql.*;
 import java.util.Scanner;
 
-public class HRSalary {
+public class HRSalaryPstmt {
     public static void main(String[] args) {
         // 데이터베이스 접속 정보
         String dburl = "jdbc:oracle:thin:@localhost:1521:xe"; // DB URL
@@ -16,11 +16,11 @@ public class HRSalary {
         int maxSalary = sc.nextInt();
         System.out.println("====================================");
 
-        String sql = "SELECT first_name || ' ' || last_name as name, salary " +
-                "FROM employees " +
-                "WHERE salary BETWEEN ? AND ? " +
-                "ORDER BY salary ASC";
-        System.out.println("Query = " + sql);
+        String sql = "SELECT first_name || ' ' || last_name, salary FROM employees "
+                + "WHERE salary BETWEEN "
+                + minSalary + " AND " + maxSalary + " ORDER BY salary ASC";
+        System.out.println("Query:" + sql);
+
 
         // 데이터 베이스 연결
         try {
@@ -29,10 +29,8 @@ public class HRSalary {
             Connection conn = DriverManager.getConnection(dburl, dbuser, dbpass);
 
             // 쿼리 실행
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, minSalary);  // 첫 번째 물음표에 최소 급여 값 바인딩
-            stmt.setInt(2, maxSalary);  // 두 번째 물음표에 최대 급여 값 바인딩
-            ResultSet rs = stmt.executeQuery();  // 쿼리 실행
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);  // 쿼리 실행
 
             // 결과 출력
             int count = 0;

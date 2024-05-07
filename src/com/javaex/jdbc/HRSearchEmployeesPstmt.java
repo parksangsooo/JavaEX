@@ -3,7 +3,7 @@ package com.javaex.jdbc;
 import java.sql.*;
 import java.util.Scanner;
 
-public class HRSalary {
+public class HRSearchEmployeesPstmt {
     public static void main(String[] args) {
         // 데이터베이스 접속 정보
         String dburl = "jdbc:oracle:thin:@localhost:1521:xe"; // DB URL
@@ -11,16 +11,9 @@ public class HRSalary {
         String dbpass = "hr"; // DB 패스워드
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("최소 급여와 최대 급여를 입력하세요. (예: 2000 10000)");
-        int minSalary = sc.nextInt();
-        int maxSalary = sc.nextInt();
-        System.out.println("====================================");
+        System.out.println("검색할 사원의 이름 또는 성을 입력하세요: ");
+        String inputName = sc.nextLine();
 
-        String sql = "SELECT first_name || ' ' || last_name as name, salary " +
-                "FROM employees " +
-                "WHERE salary BETWEEN ? AND ? " +
-                "ORDER BY salary ASC";
-        System.out.println("Query = " + sql);
 
         // 데이터 베이스 연결
         try {
@@ -28,18 +21,27 @@ public class HRSalary {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection(dburl, dbuser, dbpass);
 
+            // Sql 쿼리 준비
+            String sql = "SELECT first_name, last_name, email, phone_number, hire_date " +
+                    "FROM employees " +
+                    "WHERE lower(first_name) LIKE ? OR lower(last_name) LIKE ?";
+
             // 쿼리 실행
             PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, minSalary);  // 첫 번째 물음표에 최소 급여 값 바인딩
-            stmt.setInt(2, maxSalary);  // 두 번째 물음표에 최대 급여 값 바인딩
-            ResultSet rs = stmt.executeQuery();  // 쿼리 실행
+            inputName = "%" + inputName.toLowerCase() + "%";
+            stmt.setString(1,inputName);
+            stmt.setString(2,inputName);
+            ResultSet rs = stmt.executeQuery();
 
             // 결과 출력
             int count = 0;
             while (rs.next()) {
-                String name = rs.getString("name");
-                int salary = rs.getInt("salary");
-                System.out.printf("%-20s \t %d\n", name, salary);
+                String fName = rs.getString("first_name");
+                String lName = rs.getString("last_name");
+                String email = rs.getString("email");
+                String phoneNumber = rs.getString("phone_number");
+                Date hireDate = rs.getDate("hire_date");
+                System.out.printf("[Name]: %s %s, [email]: %s, [phone]: %s, [HireDate]: %s\n", fName,lName,email,phoneNumber,hireDate);
                 count++;
             }
             System.out.println("count = " + count);
