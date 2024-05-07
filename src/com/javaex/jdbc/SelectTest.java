@@ -1,4 +1,4 @@
-package com.javaex.jdbc; // 패키지 선언: 이 클래스가 com.javaex.jdbc 패키지에 속함을 명시
+package com.javaex.jdbc;
 
 import java.sql.*; // java.sql 패키지의 모든 클래스와 인터페이스를 임포트
 
@@ -23,13 +23,13 @@ public class SelectTest {
             stmt = conn.createStatement();
             rs = null; // ResultSet 초기화
             String sql = "SELECT department_id, department_name FROM departments"; // 실행할 SQL 문
-            rs = stmt.executeQuery(sql);    // SQL 쿼리 실행 및 결과 반환
+            rs = stmt.executeQuery(sql);    // SQL 쿼리 실행 및 결과 반환 (DB Cursor 반환)
 
             // ResultSet을 순회하며 데이터 추출
             while (rs.next()) {
-                // 각 컬럼 값을 추출
-                int deptId = rs.getInt(1);   // 첫 번째 컬럼(컬럼 순서)의 정수 값(부서 ID)을 가져옴
-                String deptName = rs.getString("department_name"); // "department_name" 컬럼의 문자열 값(부서 이름)을 가져옴
+                // 각 컬럼 값을 추출 (getXXX[컬럼순서] or getXXX[컬럼 프로젝션 이름])
+                int deptId = rs.getInt(1);   // 첫 번째 컬럼(컬럼 순서)의 정수 값(부서 ID)을 가져옴 (rs.getInt("department_id") 도 가능)
+                String deptName = rs.getString("department_name"); // "department_name" 컬럼의 문자열 값(부서 이름)을 가져옴 (rs.getString(2) 도 가능)
                 // 결과 출력
                 System.out.printf("%d:%s%n", deptId, deptName);
             }
@@ -42,7 +42,7 @@ public class SelectTest {
             System.err.println("SQLError!");
             e.printStackTrace();
         } finally {
-            // 자원 정리
+            // 시스템 자원 정리
             try {
                 rs.close(); // ResultSet 닫기
             } catch (Exception e) {
