@@ -4,30 +4,38 @@ import java.util.Date;
 
 public class HREmpVO {
     private Integer employeeId;
-    private String fullName;
+    private String firstName;
+    private String lastName;
     private String email;
     private String phoneNum;
-    private Date hire_date;
+    private Date hireDate;
     private Integer salary;
 
     public HREmpVO() {
     }
 
-    public HREmpVO(Integer employeeId, String fullName, String email, String phoneNum, Date hire_date, Integer salary) {
-        this.employeeId = employeeId;
-        this.fullName = fullName;
+    public HREmpVO(String firstName, String lastName, String email, String phoneNumber, Date hireDate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.phoneNum = phoneNum;
-        this.hire_date = hire_date;
+        this.phoneNum = phoneNumber;
+        this.hireDate = hireDate;
+    }
+
+    public HREmpVO(Integer employeeId, String firstName, String lastName, String email, String phoneNumber, Date hireDate, int salary) {
+        this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNum = phoneNumber;
+        this.hireDate = hireDate;
         this.salary = salary;
     }
 
-    public HREmpVO(Integer employeeId, String fullName, String email, String phoneNum, Date hire_date) {
-        this.employeeId = employeeId;
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNum = phoneNum;
-        this.hire_date = hire_date;
+    public HREmpVO(String firstName, String lastName, int salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
     }
 
     public Integer getEmployeeId() {
@@ -38,12 +46,24 @@ public class HREmpVO {
         this.employeeId = employeeId;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     public String getEmail() {
@@ -62,12 +82,12 @@ public class HREmpVO {
         this.phoneNum = phoneNum;
     }
 
-    public Date getHire_date() {
-        return hire_date;
+    public Date getHireDate() {
+        return hireDate;
     }
 
-    public void setHire_date(Date hire_date) {
-        this.hire_date = hire_date;
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
     }
 
     public Integer getSalary() {
@@ -82,10 +102,11 @@ public class HREmpVO {
     public String toString() {
         return "HREmpVO{" +
                 "employeeId=" + employeeId +
-                ", fullName='" + fullName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNum='" + phoneNum + '\'' +
-                ", hire_date=" + hire_date +
+                ", hireDate=" + hireDate +
                 ", salary=" + salary +
                 '}';
     }
